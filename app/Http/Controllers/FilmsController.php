@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Film;
+use App\Http\Requests\StoreFilm;
 
 class FilmsController extends Controller
 {
@@ -15,15 +16,7 @@ class FilmsController extends Controller
         return response()->json($film);
     }
 
-    public function store(Request $request) {
-        // TODO: refactor code
-        $validator = \Validator::make($request->all(), \Config::get('rules.films'));
-
-        if ($validator->fails()) {
-            $validationMessage = $validator->messages();
-            return response()->json($validationMessage);
-        }
-        
+    public function store(StoreFilm $request) {
         $file = $request->file('photo');
         $fileName = md5($file->getFilename()) . '.' . $file->extension();
 
@@ -39,7 +32,7 @@ class FilmsController extends Controller
         return response()->json($film);
     }
 
-    public function update(Request $request, Film $film) {
+    public function update(StoreFilm $request, Film $film) {
         // TODO: refactor code
         $validator = \Validator::make($request->all(), \Config::get('rules.films'));
 
