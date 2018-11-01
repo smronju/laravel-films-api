@@ -11,6 +11,6 @@ $factory->define(App\Film::class, function (Faker $faker) {
         'ticket_price' => $faker->randomNumber(),
         'country' => $faker->country,
         'genre' => $faker->randomElement(['Comedy','Drama','Horror','Action']),
-        'photo' => $faker->image('public/image',400,300, null, false)
+        'photo' => $faker->image('public/images/posters',400,300, null, false)
     ];
 });
