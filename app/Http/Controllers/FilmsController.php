@@ -12,7 +12,8 @@ class FilmsController extends Controller
         return response()->json(Film::paginate(1));
     }
 
-    public function show(Film $film) {
+    public function show($slug) {
+        $film = Film::where('slug', $slug)->with('comments')->first();
         return response()->json($film);
     }
 
@@ -32,7 +33,7 @@ class FilmsController extends Controller
         return response()->json($film);
     }
 
-    public function update(StoreFilm $request, Film $film) {
+    public function update(Request $request, Film $film) {
         // TODO: refactor code
         $validator = \Validator::make($request->all(), \Config::get('rules.films'));
 
